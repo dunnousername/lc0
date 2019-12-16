@@ -40,7 +40,7 @@ namespace lczero {
      TFLiteComputation(const TFLiteNetwork *network) {
       this->network = network;
      }
-     virtual ~BlasComputation() {}
+     virtual ~TFLiteComputation() {}
      void AddInput(InputPlanes&& input) override { planes_.emplace_back(input); }
      void ComputeBlocking() override {
       
