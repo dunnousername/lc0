@@ -13,6 +13,8 @@
  along with Leela Chess.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "neural/factory.h"
+#include "neural/network.h"
 #include "neural/network_legacy.h"
 
 namespace lczero {
