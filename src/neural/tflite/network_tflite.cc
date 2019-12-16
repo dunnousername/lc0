@@ -19,20 +19,28 @@
 
 namespace lczero {
   using namespace tflite_backend;
+  class TFLiteNetwork : public Network {
+    public: 
+     TFLiteNetwork(const WeightsFile& file) {
+      this->file = file;
+     }
+    private:
+     const WeightsFile& file;
+  };
   class TFLiteComputation : public NetworkComputation {
     public:
-     TFLiteComputation(const LegacyWeights& weights, const size_t max_batch_size,
-                  const bool wdl, const bool conv_policy, const int tflite_cores);
+     TFLiteComputation(const TFLiteNetwork *network) {
+      this->network = network;
+     }
      virtual ~BlasComputation() {}
      void AddInput(InputPlanes&& input) override { planes_.emplace_back(input); }
-     void ComputeBlocking() override;
+     void ComputeBlocking() override {
+      
+     }
      int GetBatchSize() const override { return static_cast<int>(planes_.size()); }
      
     private:
      std::vector<InputPlanes> planes_;
-  }
-  class TFLiteNetwork : public Network {
-    public: 
-  }
-  
+     TFLiteNetwork *network;
+  };
 }
