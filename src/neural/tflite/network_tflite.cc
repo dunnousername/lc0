@@ -14,6 +14,7 @@
  */
 
 #include "neural/factory.h"
+#include "neural/loader.h"
 #include "neural/network.h"
 #include "neural/network_legacy.h"
 
