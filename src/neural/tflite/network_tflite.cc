@@ -21,8 +21,11 @@ namespace lczero {
   using namespace tflite_backend;
   class TFLiteComputation : public NetworkComputation {
     public:
+     TFLiteComputation(const LegacyWeights& weights, const size_t max_batch_size,
+                  const bool wdl, const bool conv_policy, const int tflite_cores);
      virtual ~BlasComputation() {}
      void AddInput(InputPlanes&& input) override { planes_.emplace_back(input); }
+     void ComputeBlocking() override;
      int GetBatchSize() const override { return static_cast<int>(planes_.size()); }
      
     private:
@@ -31,4 +34,5 @@ namespace lczero {
   class TFLiteNetwork : public Network {
     public: 
   }
+  
 }
