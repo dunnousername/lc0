@@ -23,9 +23,16 @@ namespace lczero {
     public: 
      TFLiteNetwork(const WeightsFile& file) {
       this->file = file;
+      this->model = tflite::FlatBufferModel::BuildFromFile(filename?);
+      tflite::ops::builtin::BuiltinOpResolver resolver;
+      //std::unique_ptr<tflite::Interpreter> interpreter;
+      tflite::InterpreterBuilder(*model, resolver)(&this->interpreter);
      }
+     WeightsFile& file;
+     tflite::FlatBufferModel& model;
+     std::unique_ptr<tflite::Interpreter> interpreter;
     private:
-     const WeightsFile& file;
+     
   };
   class TFLiteComputation : public NetworkComputation {
     public:
